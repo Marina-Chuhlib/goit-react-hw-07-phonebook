@@ -27,8 +27,8 @@ const ContactForm = () => {
     });
   };
 
-  const handleAddContact = ( name, number ) => {
-    dispatch(fetchAddContact({ name, number }));
+  const handleAddContact = ( name, phone ) => {
+    dispatch(fetchAddContact({ name, phone }));
 
     toast.success('Success,contact added', {
       position: toast.POSITION.TOP_CENTER,
