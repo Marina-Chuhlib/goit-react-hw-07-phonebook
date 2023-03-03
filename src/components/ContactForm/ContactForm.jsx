@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { toast } from 'react-toastify';
-
 import {
   fetchAllContacts,
   fetchAddContact,
@@ -27,13 +25,9 @@ const ContactForm = () => {
     });
   };
 
-  const handleAddContact = ( {name, phone }) => {
-    dispatch(fetchAddContact( {name, phone} ));
-
-    toast.success('Success,contact added', {
-      position: toast.POSITION.TOP_CENTER,
-    });
-    console.log("hello")
+  const handleAddContact = e => {
+    e.preventDefault();
+    dispatch(fetchAddContact({ name, number }));
 
     setState({ ...initialState });
   };

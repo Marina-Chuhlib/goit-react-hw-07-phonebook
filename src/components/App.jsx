@@ -13,6 +13,8 @@ import css from './App.module.css';
 
 const App = () => {
   const isContacts = Boolean(useSelector(getFilteredContacts).length);
+  const {isLoading} = useSelector(state => state.contacts.isLoading)
+  console.log(isLoading)
 
   return (
     <div className={css.wrapper}>
@@ -25,7 +27,7 @@ const App = () => {
       {isContacts && <ContactsList />}
 
       {!isContacts && <p className={css.text}>No contacts in list</p>}
-      <ToastContainer autoClose={1500} />
+      <ToastContainer autoClose={1500} position="top-center" />
     </div>
   );
 };
