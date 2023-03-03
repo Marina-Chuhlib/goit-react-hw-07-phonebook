@@ -27,12 +27,13 @@ const ContactForm = () => {
     });
   };
 
-  const handleAddContact = ({ name, number }) => {
+  const handleAddContact = ( name, number ) => {
     dispatch(fetchAddContact({ name, number }));
 
     toast.success('Success,contact added', {
       position: toast.POSITION.TOP_CENTER,
     });
+    console.log("hello")
 
     setState({ ...initialState });
   };

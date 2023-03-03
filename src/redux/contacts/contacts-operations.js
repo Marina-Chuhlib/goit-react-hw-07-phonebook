@@ -25,21 +25,21 @@ export const fetchAddContact = createAsyncThunk(
     } catch ({ response }) {
       return rejectWithValue(response.data);
     }
-  },
-  {
-    condition: ({ name }, { getState }) => {
-      const { contacts } = getState();
-      console.log(contacts, 'contacts');
-      const normalizedTitle = name.toLowerCase();
-      const result = contacts.items.find(({ name }) => {
-        return name.toLowerCase() === normalizedTitle;
-      });
-      if (result) {
-        alert(`${name} is already in contacts`);
-        return false;
-      }
-    },
   }
+  //   {
+  //     condition: ({ name }, { getState }) => {
+  //       const { contacts } = getState();
+  //       console.log(contacts, 'contacts');
+  //       const normalizedTitle = name.toLowerCase();
+  //       const result = contacts.items.find(({ name }) => {
+  //         return name.toLowerCase() === normalizedTitle;
+  //       });
+  //       if (result) {
+  //         alert(`${name} is already in contacts`);
+  //         return false;
+  //       }
+  //     },
+  //   }
 );
 
 export const fetchDeleteContact = createAsyncThunk(
