@@ -1,8 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-import { useDispatch, useSelector } from 'react-redux';
-import { addContact } from 'redux/contacts/contacts-slice';
-import { getAllContacts } from 'redux/contacts/contacts-selectors';
+import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
+
+import {
+  fetchAllContacts,
+  fetchAddContact,
+} from 'redux/contacts/contacts-operations';
 
 import initialState from './initialState';
 import css from '../ContactForm/ContactForm.module.css';
@@ -10,9 +14,11 @@ import css from '../ContactForm/ContactForm.module.css';
 const ContactForm = () => {
   const [state, setState] = useState({ ...initialState });
 
-  const contacts = useSelector(getAllContacts);
-
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchAllContacts());
+  }, [dispatch]);
 
   const handleSearch = e => {
     const { name, value } = e.target;
@@ -21,22 +27,12 @@ const ContactForm = () => {
     });
   };
 
-  const isDuplicate = name => {
-    const normalized = name.toLowerCase();
-    const result = contacts.find(({ name }) => {
-      return normalized === name.toLowerCase();
-    });
-    return Boolean(result);
-  };
+  const handleAddContact = ({ name, number }) => {
+    dispatch(fetchAddContact({ name, number }));
 
-  const handleAddContact = e => {
-    e.preventDefault();
-    if (isDuplicate(name)) {
-      alert(`${name} is already in contacts`);
-      return false;
-    }
-    const action = addContact({ name, number });
-    dispatch(action);
+    toast.success('Success,contact added', {
+      position: toast.POSITION.TOP_CENTER,
+    });
 
     setState({ ...initialState });
   };

@@ -1,7 +1,9 @@
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
+import { useSelector,useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
+
 import { getFilteredContacts } from 'redux/contacts/contacts-selectors';
-import { deleteContact } from 'redux/contacts/contacts-slice';
+import { fetchDeleteContact } from 'redux/contacts/contacts-operations';
+
 
 import css from '../ContactsList/ContactsList.module.css';
 
@@ -11,13 +13,17 @@ const ContactsList = () => {
   const dispatch = useDispatch();
 
   const handleDeleteContact = id => {
-    dispatch(deleteContact(id));
+    dispatch(fetchDeleteContact(id));
+
+        toast.error('Contact deleted', {
+      position: toast.POSITION.TOP_CENTER,
+    });
   };
 
-  const elements = filteredContacts.map(({ id, name, number }) => (
+  const elements = filteredContacts.map(({ id, name,phone  }) => (
     <li key={id} className={css.item}>
       <p className={css.contact}>
-        {name}: <span className={css.number}>{number}</span>{' '}
+        {name}: <span className={css.number}>{phone}</span>{' '}
       </p>
       <button
         type="button"

@@ -1,5 +1,8 @@
 import { useSelector } from 'react-redux';
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import { getFilteredContacts } from '../redux/contacts/contacts-selectors';
 
 import ContactForm from './ContactForm/ContactForm';
@@ -22,6 +25,7 @@ const App = () => {
       {isContacts && <ContactsList />}
 
       {!isContacts && <p className={css.text}>No contacts in list</p>}
+      <ToastContainer autoClose={1500} />
     </div>
   );
 };
