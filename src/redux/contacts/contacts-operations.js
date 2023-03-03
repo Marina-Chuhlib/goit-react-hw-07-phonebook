@@ -9,9 +9,10 @@ export const fetchAllContacts = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const data = await api.fetchContacts();
-      console.log(data, 'fetch');
+      //   console.log(data, 'fetch');
       return data;
     } catch ({ response }) {
+      toast.error(` Sorry,${response.data}`);
       return rejectWithValue(response.data);
     }
   }
@@ -25,6 +26,7 @@ export const fetchAddContact = createAsyncThunk(
       const result = await api.addContact(data);
       return result;
     } catch ({ response }) {
+      toast.error(` Sorry,${response.data}`);
       return rejectWithValue(response.data);
     }
   },
@@ -52,6 +54,7 @@ export const fetchDeleteContact = createAsyncThunk(
       await api.deleteContact(id);
       return id;
     } catch ({ response }) {
+      toast.error(` Sorry,${response.data}`);
       return rejectWithValue(response.data);
     }
   }
