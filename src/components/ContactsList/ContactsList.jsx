@@ -31,7 +31,6 @@ const ContactsList = () => {
       </button>
     </li>
   ));
-
   return <ul className={css.list}>{elements}</ul>;
 };
 
